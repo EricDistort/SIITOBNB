@@ -2,6 +2,7 @@ import {StyleSheet, View, SafeAreaView, Image} from 'react-native';
 import React from 'react';
 import LottieView from 'lottie-react-native';
 import Siri from './Siri';
+import { BlurView } from '@react-native-community/blur';
 
 export default function NavigationPanel() {
   return (
@@ -64,18 +65,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#dceafa',
     justifyContent: 'space-evenly',
     borderRadius: 25,
-    shadowColor: '#000000',
-    shadowOffset: {width: 5, height: 5},
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-    elevation: 5,
+    borderColor: '#ff8800',
+    borderWidth: 2,
+
     position: 'absolute', //Here is the trick
-    bottom: 0, //Here is the trick
+    bottom: -2, //Here is the trick
     alignSelf: 'center',
     flex: 1,
     height: 80,
     right: 0,
     left: 0,
+
 
     // position: 'fixed'
   },
