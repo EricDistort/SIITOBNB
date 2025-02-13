@@ -8,17 +8,20 @@ import {
 } from 'react-native';
 import React from 'react';
 //import Test from './components/Test';
-import Scroll from './components/Scroll';
+//import Scroll from './components/Scroll';
 import FancyCard from './components/FancyCard';
 import ContactList from './components/ContactList';
 import NavigationPanel from './components/NavigationPanel';
+import Welcome from './components/Welcome';
+import Landing from './components/Landing';
 
 export default function App() {
   return (
     <SafeAreaView style={styles.main}>
-      <StatusBar backgroundColor="#fff" barStyle="light-content" />
+      <StatusBar backgroundColor="#000000" barStyle="light-content" />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Scroll />
+        <Welcome />
+        <Landing />
         <FancyCard />
         <ContactList />
       </ScrollView>
@@ -29,6 +32,12 @@ export default function App() {
 
 const styles = StyleSheet.create({
   main: {
+    backgroundColor: '#000000',
+  },
+
+  button: {
+    height: 200,
+    width: 20,
     backgroundColor: '#FFFFFF',
   },
 });
