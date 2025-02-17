@@ -15,7 +15,7 @@ const TouchAnimation = () => {
 
   const onPressIn = () => {
     Animated.spring(scaleValue, {
-      toValue: 2.5, // Shrink
+      toValue: 1.8, // Shrink
       useNativeDriver: true,
     }).start();
   };
