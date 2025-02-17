@@ -75,7 +75,6 @@ const styles = StyleSheet.create({
     height: 80,
     right: 0,
     left: 0,
-
     overflow: 'hidden',
   },
 
