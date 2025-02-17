@@ -2,50 +2,56 @@ import {StyleSheet, View, SafeAreaView, Image} from 'react-native';
 import React from 'react';
 import LottieView from 'lottie-react-native';
 import Siri from './Siri';
-import { BlurView } from '@react-native-community/blur';
+import {BlurView} from '@react-native-community/blur';
 
 export default function NavigationPanel() {
   return (
     <SafeAreaView>
       <View style={styles.container}>
-        <View style={[styles.card, styles.cardOne]}>
-          <LottieView
-            style={styles.homeAnimation}
-            source={require('../media/searchNavigate.json')}
-            autoPlay
-            loop
-          />
-        </View>
+        <BlurView
+          style={styles.BlurVie}
+          blurType="light" // You can use 'dark', 'light', or 'xlight'
+          blurAmount={10} // Adjust the blur intensity
+          // Fallback color for devices that don't support blur
+        >
+          <View style={[styles.card, styles.cardOne]}>
+            <LottieView
+              style={styles.homeAnimation}
+              source={require('../media/searchNavigate.json')}
+              autoPlay
+              loop
+            />
+          </View>
 
-        <View style={[styles.card, styles.cardTwo]}>
-          <LottieView
-            style={styles.homeAnimation}
-            source={require('../media/eyeNavigate.json')}
-            autoPlay
-            loop
-          />
-        </View>
+          <View style={[styles.card, styles.cardTwo]}>
+            <LottieView
+              style={styles.homeAnimation}
+              source={require('../media/eyeNavigate.json')}
+              autoPlay
+              loop
+            />
+          </View>
 
-        
-        <Siri />
+          <Siri />
 
-        <View style={[styles.card, styles.cardFour]}>
-          <LottieView
-            style={styles.homeAnimation}
-            source={require('../media/locationNavigate.json')}
-            autoPlay
-            loop
-          />
-        </View>
+          <View style={[styles.card, styles.cardFour]}>
+            <LottieView
+              style={styles.homeAnimation}
+              source={require('../media/locationNavigate.json')}
+              autoPlay
+              loop
+            />
+          </View>
 
-        <View style={[styles.card, styles.cardFive]}>
-          <LottieView
-            style={styles.homeAnimation}
-            source={require('../media/globalNavigate.json')}
-            autoPlay
-            loop
-          />
-        </View>
+          <View style={[styles.card, styles.cardFive]}>
+            <LottieView
+              style={styles.homeAnimation}
+              source={require('../media/globalNavigate.json')}
+              autoPlay
+              loop
+            />
+          </View>
+        </BlurView>
       </View>
     </SafeAreaView>
   );
@@ -61,23 +67,30 @@ const styles = StyleSheet.create({
   container: {
     padding: 10,
     alignItems: 'center',
-    flexDirection: 'row',
-    backgroundColor: '#dceafa',
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
     borderRadius: 25,
-    borderColor: '#ff8800',
-    borderWidth: 2,
-
-    position: 'absolute', //Here is the trick
-    bottom: -2, //Here is the trick
-    alignSelf: 'center',
+    position: 'absolute',
+    bottom: -2,
     flex: 1,
     height: 80,
     right: 0,
     left: 0,
 
+    overflow: 'hidden',
+  },
 
-    // position: 'fixed'
+  BlurVie: {
+    //padding: 10,
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    borderRadius: 25,
+    position: 'absolute',
+    bottom: -2,
+    flex: 1,
+    height: 80,
+    right: 0,
+    left: 0,
+    flexDirection: 'row',
   },
 
   cardOne: {
