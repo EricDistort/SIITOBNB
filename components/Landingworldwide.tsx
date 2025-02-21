@@ -6,6 +6,8 @@ export default function Landingworldwide() {
   return (
     <SafeAreaView style={styles.maincontainer}>
       <View style={styles.container}>
+
+        <View style={styles.circlefive}>
         <Image
           style={styles.webfifth}
           source={require('../media/webfifth.jpg')}
@@ -14,23 +16,21 @@ export default function Landingworldwide() {
           style={styles.webfourth}
           source={require('../media/webfourth.jpg')}
         />
-
-        <View style={styles.circlefive}>
+          <View style={styles.circlefour}>
           <Image
             style={styles.webthird}
             source={require('../media/webthird.jpg')}
           />
-          <View style={styles.circlefour}>
+            <View style={styles.circlethree}>
             <Image
               style={styles.websecond}
               source={require('../media/websecond.jpg')}
             />
-            <View style={styles.circlethree}>
+              <View style={styles.circletwo}>
               <Image
                 style={styles.webfirst}
                 source={require('../media/webfirst.jpg')}
               />
-              <View style={styles.circletwo}>
                 <Image
                   style={styles.centerlogo}
                   source={require('../media/centerlogo.png')}
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
     width: 21.5,
     borderRadius: 15,
     position: 'absolute',
-    top: 30,
+    top: -3,
     left: 100,
   },
 
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
     width: 31.25,
     borderRadius: 50,
     position: 'absolute',
-    top: 100,
+    top: 25,
     left: 25,
   },
   websecond: {
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
     width: 35,
     borderRadius: 50,
     position: 'absolute',
-    top: 15,
+    top: -15,
     left: 100,
   },
   webfirst: {
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
     width: 42,
     borderRadius: 50,
     position: 'absolute',
-    top: 40,
-    left: 150,
+    top: 30,
+    left: 130,
   },
 });
