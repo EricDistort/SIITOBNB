@@ -1,43 +1,25 @@
-import {
-  View,
-  Text,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-} from 'react-native';
 import React from 'react';
-//import Test from './components/Test';
-//import Scroll from './components/Scroll';
-import FancyCard from './components/FancyCard';
-import ContactList from './components/ContactList';
-import NavigationPanel from './components/NavigationPanel';
-import Welcome from './components/Welcome';
-import Landing from './components/Landing';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import HomeScreen from './src/Screens/HomeScreen';
+import DetailsScreen from './src/Screens/DetailsScreen';
+import {RootStackParamList} from './src/types';
 
-export default function App() {
+const Stack = createStackNavigator<RootStackParamList>();
+
+const App = () => {
   return (
-    <SafeAreaView style={styles.main}>
-      <StatusBar backgroundColor="#000000" barStyle="light-content" />
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <Welcome />
-        <Landing />
-        <FancyCard />
-        <ContactList />
-      </ScrollView>
-      <NavigationPanel />
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen name="Details" component={DetailsScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  main: {
-    backgroundColor: '#000000',
-  },
-
-  button: {
-    height: 200,
-    width: 20,
-    backgroundColor: '#FFFFFF',
-  },
-});
+export default App;

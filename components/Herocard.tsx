@@ -1,4 +1,4 @@
-import {SafeAreaView, StyleSheet, Text, View, Image, Button} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View, Image} from 'react-native';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import LottieView from 'lottie-react-native';
@@ -79,13 +79,13 @@ const styles = StyleSheet.create({
   },
   containersecondtext: {
     borderWidth: 0.3,
-    borderColor: '#FFFFFF'
+    borderColor: '#FFFFFF',
   },
   containersecondtextfirst: {
     color: '#FFFFFF',
     fontFamily: 'Poppins',
     fontWeight: 'bold',
-    fontSize: 38
+    fontSize: 38,
   },
   containersecondtextwithanimation: {
     flexDirection: 'row',
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
 
   containersecondloadinganimation: {
     height: 5,
-    width: 30
+    width: 30,
   },
 
 });

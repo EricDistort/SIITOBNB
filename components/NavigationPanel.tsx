@@ -1,4 +1,4 @@
-import {StyleSheet, View, SafeAreaView, Image} from 'react-native';
+import {StyleSheet, View, SafeAreaView} from 'react-native';
 import React from 'react';
 import LottieView from 'lottie-react-native';
 import Siri from './Siri';
