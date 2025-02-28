@@ -1,9 +1,11 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import {Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../src/types';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { StyleSheet } from 'react-native';
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
@@ -13,6 +15,7 @@ type Props = {
 
 const Touch = () => {
     const navigation = useNavigation<NavigationProp>();
+
   return (
     <SafeAreaView>
       <TouchableOpacity
@@ -27,7 +30,7 @@ const Touch = () => {
 
 export default Touch;
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   touch: {
     height: 200,
     backgroundColor: '#FFFFFF',

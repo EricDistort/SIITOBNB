@@ -1,23 +1,38 @@
 import React from 'react';
-import {View, Text, Button, StyleSheet} from 'react-native';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {RootStackParamList} from '../types';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 type Props = StackScreenProps<RootStackParamList, 'Details'>;
 
-const DetailsScreen: React.FC<Props> = ({route, navigation}) => {
+const DetailsScreen: React.FC<Props> = ({navigation}) => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Details Screen</Text>
-      <Text>User ID: {route.params.userId}</Text>
-      <Button title="Go Back" onPress={() => navigation.goBack()} />
-    </View>
+    <SafeAreaView style={styles.main}>
+      <View style={styles.main}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={styles.button}>
+          </TouchableOpacity>
+      </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {flex: 1, alignItems: 'center', justifyContent: 'center'},
-  text: {fontSize: 20, fontWeight: 'bold'},
+  main: {
+    backgroundColor: 'transparent',
+  },
+
+  container: {
+    backgroundColor: 'transparent',
+  },
+
+  button: {
+    height: 20,
+    width: 50,
+    backgroundColor: 'green',
+  },
 });
 
 export default DetailsScreen;
