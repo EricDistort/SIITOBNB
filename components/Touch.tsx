@@ -4,8 +4,8 @@ import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../src/types';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { StyleSheet } from 'react-native';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {StyleSheet} from 'react-native';
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
@@ -13,24 +13,21 @@ type Props = {
   navigation: HomeScreenNavigationProp;
 };
 
-const Touch = () => {
-    const navigation = useNavigation<NavigationProp>();
+export default function Touch() {
+  const navigation = useNavigation<NavigationProp>();
 
   return (
     <SafeAreaView>
-      <TouchableOpacity
-        onPress={() => navigation.navigate('Details', {userId: 123})}>
+      <TouchableOpacity onPress={() => navigation.navigate('Details')}>
         <View style={styles.touch}>
           <Text>Touch</Text>
         </View>
       </TouchableOpacity>
     </SafeAreaView>
   );
-};
+}
 
-export default Touch;
-
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   touch: {
     height: 200,
     backgroundColor: '#FFFFFF',
