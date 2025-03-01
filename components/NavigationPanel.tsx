@@ -8,12 +8,7 @@ export default function NavigationPanel() {
   return (
     <SafeAreaView>
       <View style={styles.container}>
-        <BlurView
-          style={styles.BlurVie}
-          blurType="light" // You can use 'dark', 'light', or 'xlight'
-          blurAmount={10} // Adjust the blur intensity
-          // Fallback color for devices that don't support blur
-        >
+        <BlurView style={styles.BlurVie} blurType="light" blurAmount={10}>
           <View style={[styles.card, styles.cardOne]}>
             <LottieView
               style={styles.homeAnimation}

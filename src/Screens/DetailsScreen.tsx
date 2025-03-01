@@ -1,59 +1,30 @@
+import {SafeAreaView, ScrollView, StatusBar, StyleSheet} from 'react-native';
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity, Image} from 'react-native';
-import {StackScreenProps} from '@react-navigation/stack';
-import {RootStackParamList} from '../types';
-import {SafeAreaView} from 'react-native-safe-area-context';
+//import Test from './components/Test';
+//import Scroll from './components/Scroll';
+import ContactList from '../../components/ContactList';
+import NavigationPanel from '../../components/NavigationPanel';
+import Welcome from '../../components/Welcome';
+import Landing from '../../components/Landing';
+import Touch from '../../components/Touch';
+import FancyCard from '../../components/FancyCard';
 
-type Props = StackScreenProps<RootStackParamList, 'Details'>;
-
-const DetailsScreen: React.FC<Props> = ({navigation}) => {
+export default function Home() {
   return (
     <SafeAreaView style={styles.main}>
-      <View style={styles.container}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.button}></TouchableOpacity>
-        <Image
-          resizeMode="cover"
-          style={styles.logo}
-          source={require('../../media/logo.png')}
-        />
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.button}></TouchableOpacity>
-      </View>
+      <StatusBar backgroundColor="#000000" barStyle="light-content" />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Welcome />
+        <FancyCard />
+        <Touch />
+      </ScrollView>
+      <NavigationPanel />
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   main: {
     backgroundColor: '#000000',
-    flex: 1,
   },
-
-  container: {
-    backgroundColor: 'transparent',
-    borderWidth: 0.2,
-    borderColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-  },
-
-  button: {
-    height: 20,
-    width: 50,
-    backgroundColor: 'yellow',
-    borderRadius: 10,
-    left: 0,
-  },
-
-  logo: {
-    height: 30,
-    width: 100,
-    alignSelf: 'center',
-  },
-});
-
-export default DetailsScreen;
+})

@@ -4,14 +4,19 @@ import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from './src/Screens/HomeScreen';
 import DetailsScreen from './src/Screens/DetailsScreen';
 import {RootStackParamList} from './src/types';
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator
+        screenOptions={{
+          cardStyle: {backgroundColor: 'black'},
+          animation: 'none',
+        }}
+        initialRouteName="Home">
         <Stack.Screen
           name="Home"
           component={HomeScreen}
@@ -28,6 +33,3 @@ const App = () => {
 };
 
 export default App;
-
-
-

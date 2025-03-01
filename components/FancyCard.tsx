@@ -62,11 +62,11 @@ export default function FancyCard() {
 
             <View style={styles.card}>
               <LottieView
-               style={styles.image}
-               source={require('../media/trial.json')}
-               autoPlay
-               loop
-                />
+                style={styles.image}
+                source={require('../media/trial.json')}
+                autoPlay
+                loop
+              />
               <Text style={styles.name}>Eliana Bridd</Text>
               <Text style={styles.designation}>Fashion Model</Text>
               <Text style={styles.bio}>
@@ -128,7 +128,6 @@ export default function FancyCard() {
               </TouchableOpacity>
             </View>
 
-
             <View style={styles.card}>
               <Image
                 style={styles.image}
@@ -150,7 +149,6 @@ export default function FancyCard() {
                 <Text style={styles.counter}>{count}</Text>
               </TouchableOpacity>
             </View>
-            
           </View>
         </ScrollView>
       </View>
