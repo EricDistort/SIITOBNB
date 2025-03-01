@@ -15,8 +15,8 @@ export default function Home() {
       <ScrollView showsVerticalScrollIndicator={false}>
         <Welcome />
         <Landing />
-        <ContactList />
         <Touch />
+        <ContactList />
       </ScrollView>
       <NavigationPanel />
     </SafeAreaView>

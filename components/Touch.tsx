@@ -17,24 +17,44 @@ export default function Touch() {
   const navigation = useNavigation<NavigationProp>();
 
   return (
-    <SafeAreaView>
-      <TouchableOpacity onPress={() => navigation.navigate('Details')}>
-        <View style={styles.touch}>
-          <Text>Touch</Text>
-        </View>
+    <SafeAreaView style={styles.main}>
+      <TouchableOpacity
+        style={styles.touch}
+        onPress={() => navigation.navigate('Details')}>
+        <Text>Touch</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.touch}
+        onPress={() => navigation.navigate('Details')}>
+        <Text>Touch</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.touch}
+        onPress={() => navigation.navigate('Details')}>
+        <Text>Touch</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  main: {
+    padding: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    borderWidth: 0.2,
+    borderColor: '#FFFFFF',
+  },
+
   touch: {
-    height: 200,
+    height: 50,
     backgroundColor: '#FFFFFF',
-    width: 200,
+    width: 80,
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 20,
+    borderRadius: 10,
   },
 });

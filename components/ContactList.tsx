@@ -1,4 +1,11 @@
-import {ScrollView, StyleSheet, Text, View, Image, SafeAreaView} from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  SafeAreaView,
+} from 'react-native';
 import React from 'react';
 //import {SafeAreaView} from 'react-native-safe-area-context';
 
@@ -63,14 +70,13 @@ export default function ContactList() {
 
   return (
     <SafeAreaView>
-      <Text style={styles.heading}>ContactList</Text>
       <View style={styles.container}>
         <ScrollView nestedScrollEnabled showsVerticalScrollIndicator={false}>
           {contacts.map(({uid, name, phone, imageUrl}) => (
             <View key={uid} style={styles.contacts}>
               <Image style={styles.contactImage} source={{uri: imageUrl}} />
-               <View style={styles.nameplate}>
-                 <Text style={styles.userName}>{name}</Text>
+              <View style={styles.nameplate}>
+                <Text style={styles.userName}>{name}</Text>
                 <Text style={styles.phone}>{phone}</Text>
               </View>
             </View>
@@ -82,11 +88,6 @@ export default function ContactList() {
 }
 
 const styles = StyleSheet.create({
-  heading: {
-    fontSize: 30,
-    marginLeft: 20,
-  },
-
   container: {
     padding: 10,
     margin: 20,
