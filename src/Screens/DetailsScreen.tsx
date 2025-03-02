@@ -15,10 +15,8 @@ export default function Home() {
       <StatusBar backgroundColor="#000000" barStyle="light-content" />
       <ScrollView showsVerticalScrollIndicator={false}>
         <Welcome />
-        <Touch />
         <FancyCard />
       </ScrollView>
-      <NavigationPanel />
     </SafeAreaView>
   );
 }
@@ -27,4 +25,4 @@ const styles = StyleSheet.create({
   main: {
     backgroundColor: '#000000',
   },
-})
+});

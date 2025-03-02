@@ -10,16 +10,18 @@ import Touch from '../../components/Touch';
 
 export default function Home() {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.main}>
       <StatusBar backgroundColor="#000000" barStyle="light-content" />
       <ScrollView showsVerticalScrollIndicator={false}>
         <Welcome />
         <Landing />
-        <Touch />
         <ContactList />
       </ScrollView>
-      <NavigationPanel />
     </SafeAreaView>
   );
 }
-
+const styles = StyleSheet.create({
+  main: {
+    backgroundColor: '#000000',
+  },
+});

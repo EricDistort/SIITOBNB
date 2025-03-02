@@ -20,20 +20,14 @@ export default function Touch() {
     <SafeAreaView style={styles.main}>
       <TouchableOpacity
         style={styles.touch}
-        onPress={() => navigation.navigate('Details')}>
-        <Text>Touch</Text>
+        onPress={() => navigation.navigate("Home")}>
+        <Text>Home</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.touch}
         onPress={() => navigation.navigate('Details')}>
-        <Text>Touch</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.touch}
-        onPress={() => navigation.navigate('Details')}>
-        <Text>Touch</Text>
+        <Text>Details</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -41,11 +35,18 @@ export default function Touch() {
 
 const styles = StyleSheet.create({
   main: {
-    padding: 20,
-    flexDirection: 'row',
+    padding: 10,
+    alignItems: 'center',
     justifyContent: 'space-evenly',
-    borderWidth: 0.2,
-    borderColor: '#FFFFFF',
+    borderRadius: 25,
+    position: 'absolute',
+    bottom: -2,
+    flex: 1,
+    height: 80,
+    right: 0,
+    left: 0,
+    flexDirection: 'row',
+  backgroundColor: 'grey'
   },
 
   touch: {

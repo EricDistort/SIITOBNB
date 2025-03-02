@@ -5,6 +5,7 @@ import HomeScreen from './src/Screens/HomeScreen';
 import DetailsScreen from './src/Screens/DetailsScreen';
 import {RootStackParamList} from './src/types';
 import {StyleSheet} from 'react-native';
+import StartNav from './src/Screens/StartNav';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -13,18 +14,12 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
-          cardStyle: {backgroundColor: 'black'},
           animation: 'none',
         }}
         initialRouteName="Home">
         <Stack.Screen
           name="Home"
-          component={HomeScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Details"
-          component={DetailsScreen}
+          component={StartNav}
           options={{headerShown: false}}
         />
       </Stack.Navigator>
