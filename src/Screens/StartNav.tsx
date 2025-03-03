@@ -1,8 +1,10 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {NavigationContainer, NavigationIndependentTree} from '@react-navigation/native';
+import {
+  NavigationContainer,
+  NavigationIndependentTree,
+} from '@react-navigation/native';
 import {View, Text, StyleSheet} from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeScreen from './HomeScreen';
 import DetailsScreen from './DetailsScreen';
 
@@ -14,7 +16,6 @@ const Tab = createBottomTabNavigator();
 const App: React.FC = () => {
   return (
     <NavigationIndependentTree>
-
       <Tab.Navigator
         screenOptions={({route}) => ({
           tabBarActiveTintColor: 'white',
@@ -37,7 +38,6 @@ const App: React.FC = () => {
         />
       </Tab.Navigator>
     </NavigationIndependentTree>
-    
   );
 };
 
