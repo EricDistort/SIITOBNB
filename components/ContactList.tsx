@@ -5,11 +5,25 @@ import {
   View,
   Image,
   SafeAreaView,
+  TouchableOpacity,
 } from 'react-native';
 import React from 'react';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackParamList} from '../src/types';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
 //import {SafeAreaView} from 'react-native-safe-area-context';
 
+type HomeScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'Details'
+>;
+
+type Props = {
+  navigation: HomeScreenNavigationProp;
+};
+
 export default function ContactList() {
+  const navigation = useNavigation<NavigationProp>();
   const contacts = [
     {
       uid: 1,
@@ -69,7 +83,7 @@ export default function ContactList() {
   ];
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.main}>
       <View style={styles.container}>
         <ScrollView nestedScrollEnabled showsVerticalScrollIndicator={false}>
           {contacts.map(({uid, name, phone, imageUrl}) => (
@@ -83,11 +97,25 @@ export default function ContactList() {
           ))}
         </ScrollView>
       </View>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('Details')}>
+        <Text style={styles.continuetitle}>Log Out</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  button: {
+    height: 50,
+    width: 250,
+    backgroundColor: 'rgb(255, 174, 0)',
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
   container: {
     padding: 10,
     margin: 20,
@@ -97,7 +125,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     width: 320,
     height: 255,
-    marginBottom: 100,
+    //marginBottom: 100,
   },
   contacts: {
     flexDirection: 'row',
@@ -123,4 +151,16 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   phone: {},
+
+  continuetitle: {
+    fontSize: 18,
+
+    fontWeight: 'bold',
+  },
+
+  main: {
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    height: 400,
+  },
 });

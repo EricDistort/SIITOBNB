@@ -7,6 +7,7 @@ import {
 import {View, Text, StyleSheet} from 'react-native';
 import HomeScreen from './HomeScreen';
 import DetailsScreen from './DetailsScreen';
+import musicScreen from './musicScreen';
 
 // Define screens
 
@@ -34,6 +35,11 @@ const App: React.FC = () => {
         <Tab.Screen
           name="Profile"
           component={DetailsScreen}
+          options={{headerShown: false}}
+        />
+        <Tab.Screen
+          name="Library"
+          component={musicScreen}
           options={{headerShown: false}}
         />
       </Tab.Navigator>
