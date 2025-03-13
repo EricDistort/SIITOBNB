@@ -3,10 +3,10 @@ import React from 'react';
 //import Test from './components/Test';
 //import Scroll from './components/Scroll';
 import ContactList from '../../components/ContactList';
-import NavigationPanel from '../../components/NavigationPanel';
+
 import Welcome from '../../components/Welcome';
 import Landing from '../../components/Landing';
-import Touch from '../../components/Touch';
+
 import FancyCard from '../../components/FancyCard';
 
 export default function Home() {

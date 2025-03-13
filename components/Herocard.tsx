@@ -48,8 +48,7 @@ export default function Herocard() {
 
 const styles = StyleSheet.create({
   boundingbox: {
-    borderColor: '#FFFFFF',
-    borderWidth: 0.2,
+    
   },
 
   containerfirst: {
@@ -78,8 +77,7 @@ const styles = StyleSheet.create({
     //marginLeft: 20
   },
   containersecondtext: {
-    borderWidth: 0.3,
-    borderColor: '#FFFFFF',
+    
   },
   containersecondtextfirst: {
     color: '#FFFFFF',

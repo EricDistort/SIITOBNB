@@ -34,8 +34,7 @@ export default function Welcome() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'transparent',
-    borderWidth: 0.2,
-    borderColor: '#ffffff',
+    
     height: 50,
     justifyContent: 'center',
   },

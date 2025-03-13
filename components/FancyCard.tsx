@@ -10,12 +10,10 @@ import {
 import React from 'react';
 import {useState} from 'react';
 import LottieView from 'lottie-react-native';
-import Different from './Different';
 
 export default function FancyCard() {
   const [count, setCount] = useState(0);
   const onPress = () => setCount(prevCount => prevCount + 1);
-  //const onPressOne = () => setCount(prevCount => prevCount + 1);
 
   return (
     <SafeAreaView>
@@ -57,7 +55,13 @@ export default function FancyCard() {
                 officiis hic. Quam, provident nobis?
               </Text>
               <Text style={styles.date}>06 Jan, 2024</Text>
-              <Different />
+              <TouchableOpacity style={styles.heartButton} onPress={onPress}>
+                <Image
+                  style={styles.heart}
+                  source={require('../media/heart.png')}
+                />
+                <Text style={styles.counter}>{count}</Text>
+              </TouchableOpacity>
             </View>
 
             <View style={styles.card}>
