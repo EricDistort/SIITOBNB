@@ -13,7 +13,6 @@ const App: React.FC = () => {
     <Tab.Navigator
       screenOptions={({route}) => ({
         tabBarActiveTintColor: 'white',
-        tabBarInactiveTintColor: 'gray',
         tabBarStyle: styles.tabBar,
       })}>
       <Tab.Screen
@@ -78,11 +77,6 @@ const App: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  text: {
-    color: 'white',
-    fontSize: 20,
-  },
-
   tabBar: {
     position: 'absolute',
     bottom: 20,
@@ -93,13 +87,8 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 4},
-    shadowOpacity: 0.9,
-    shadowRadius: 4,
-    elevation: 5,
+
     overflow: 'hidden',
-    flex: 1,
   },
 });
 
