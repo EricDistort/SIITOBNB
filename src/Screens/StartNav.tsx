@@ -1,19 +1,11 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {
-  NavigationContainer,
-  NavigationIndependentTree,
-} from '@react-navigation/native';
+
 import {View, Text, StyleSheet, Image} from 'react-native';
 import HomeScreen from './HomeScreen';
-import DetailsScreen from './ContactScreen';
-import musicScreen from './ProfileScreen';
 import ProfileScreen from './ProfileScreen';
 import ContactsScreen from './ContactScreen';
 
-// Define screens
-
-// Create Bottom Tab Navigator
 const Tab = createBottomTabNavigator();
 
 const App: React.FC = () => {
@@ -22,12 +14,7 @@ const App: React.FC = () => {
       screenOptions={({route}) => ({
         tabBarActiveTintColor: 'white',
         tabBarInactiveTintColor: 'gray',
-
-        tabBarStyle: {
-          backgroundColor: 'black',
-          paddingBottom: 5,
-          height: 60,
-        },
+        tabBarStyle: styles.tabBar,
       })}>
       <Tab.Screen
         name="Home"
@@ -91,15 +78,28 @@ const App: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'black',
-  },
   text: {
     color: 'white',
     fontSize: 20,
+  },
+
+  tabBar: {
+    position: 'absolute',
+    bottom: 20,
+    left: 20,
+    right: 20,
+    backgroundColor: '#000',
+    borderRadius: 15,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 4},
+    shadowOpacity: 0.9,
+    shadowRadius: 4,
+    elevation: 5,
+    overflow: 'hidden',
+    flex: 1,
   },
 });
 
