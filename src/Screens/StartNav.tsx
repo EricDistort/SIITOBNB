@@ -3,9 +3,8 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {StyleSheet, Image, Text, View} from 'react-native';
 import {BlurView} from '@react-native-community/blur';
 import DUNOScreen from './DUNOScreen';
-import SMOScreen from './SMOScreen';
-import WEBUIUXScreen from './WEBUIUXScreen';
-import BRANDINGScreen from './BRANDINGScreen';
+import LogsScreen from './LogsScreen';
+import ProfileScreen from './ProfileScreen';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -17,7 +16,7 @@ const App: React.FC = () => {
     <Tab.Navigator
       screenOptions={({route}) => ({
         tabBarActiveTintColor: 'white', // Active tab name is white
-        tabBarInactiveTintColor: '#000000', // Inactive tab name is black
+        tabBarInactiveTintColor: 'grey', // Inactive tab name is grey
         tabBarStyle: styles.tabBar,
         tabBarBackground: () => (
           <BlurView
@@ -37,25 +36,16 @@ const App: React.FC = () => {
         }}
       />
       <Tab.Screen
-        name="Branding"
-        component={BRANDINGScreen}
+        name="Profile"
+        component={ProfileScreen}
         options={{
           headerShown: false,
           tabBarIcon: () => null,
         }}
       />
       <Tab.Screen
-        name="WEB/UI/UX"
-        component={WEBUIUXScreen}
-        options={{
-          headerShown: false,
-          tabBarIcon: () => null,
-        }}
-      />
-
-      <Tab.Screen
-        name="SMO"
-        component={SMOScreen}
+        name="Logs"
+        component={LogsScreen}
         options={{
           headerShown: false,
           tabBarIcon: () => null,

@@ -32,6 +32,69 @@ export default function ContactList() {
       cast: 'Varun Dhawan, Kriti Sanon',
       time: '9.15 PM',
     },
+
+    {
+      uid: 2,
+      name: 'October',
+      cast: 'Varun Dhawan, Kriti Sanon',
+      time: '9.15 PM',
+    },
+
+    {
+      uid: 3,
+      name: 'October',
+      cast: 'Varun Dhawan, Kriti Sanon',
+      time: '9.15 PM',
+    },
+
+    {
+      uid: 4,
+      name: 'October',
+      cast: 'Varun Dhawan, Kriti Sanon',
+      time: '9.15 PM',
+    },
+
+    {
+      uid: 5,
+      name: 'October',
+      cast: 'Varun Dhawan, Kriti Sanon',
+      time: '9.15 PM',
+    },
+
+    {
+      uid: 6,
+      name: 'October',
+      cast: 'Varun Dhawan, Kriti Sanon',
+      time: '9.15 PM',
+    },
+
+    {
+      uid: 7,
+      name: 'October',
+      cast: 'Varun Dhawan, Kriti Sanon',
+      time: '9.15 PM',
+    },
+
+    {
+      uid: 8,
+      name: 'October',
+      cast: 'Varun Dhawan, Kriti Sanon',
+      time: '9.15 PM',
+    },
+
+    {
+      uid: 9,
+      name: 'October',
+      cast: 'Varun Dhawan, Kriti Sanon',
+      time: '9.15 PM',
+    },
+
+    {
+      uid: 10,
+      name: 'October',
+      cast: 'Varun Dhawan, Kriti Sanon',
+      time: '9.15 PM',
+    },
   ];
 
   return (
@@ -66,11 +129,13 @@ const styles = StyleSheet.create({
   },
   container: {
     padding: moderateScale(10),
-    backgroundColor: '#dceafa',
+    backgroundColor: '#000000',
     overflow: 'scroll',
-    height: verticalScale(120),
+    height: verticalScale(220),
     width: scale(300),
     borderRadius: moderateScale(20),
+    borderWidth: 2,
+    borderColor: 'grey',
   },
   contacts: {
     flexDirection: 'row',

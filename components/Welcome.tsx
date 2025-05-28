@@ -24,7 +24,7 @@ export default function Welcome() {
               r="50%"
               fx="50%"
               fy="50%">
-              <Stop offset="0%" stopColor="yellow" stopOpacity="1" />
+              <Stop offset="0%" stopColor="white" stopOpacity="1" />
               <Stop offset="100%" stopColor="red" stopOpacity="0" />
             </RadialGradient>
           </Defs>
@@ -32,6 +32,7 @@ export default function Welcome() {
           <Rect x="0" y="0" width="300" height="300" fill="url(#grad1)" />
         </Svg>
       </View>
+      
     </SafeAreaView>
   );
 }
@@ -56,5 +57,13 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     alignItems: 'center',
     marginTop: 15,
+  },
+  viewbox: {
+    backgroundColor: '#FFFFFF',
+    height: hp('45%'),
+    width: wp('95%'),
+    borderRadius: 20,
+    alignSelf: 'center',
+    marginTop: 40,
   },
 });

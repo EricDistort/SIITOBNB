@@ -5,9 +5,8 @@ import React from 'react';
 import ContactList from '../../components/ContactList';
 
 import Welcome from '../../components/Welcome';
-import Landing from '../../components/Landing';
-
-import FancyCard from '../../components/FancyCard';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import ViewBox from '../../components/ViewBox';
 
 export default function Home() {
   return (
@@ -15,7 +14,7 @@ export default function Home() {
       <StatusBar backgroundColor="#000000" barStyle="light-content" />
       <ScrollView showsVerticalScrollIndicator={false}>
         <Welcome />
-        <Landing />
+        <ViewBox />
         <ContactList />
       </ScrollView>
     </SafeAreaView>
