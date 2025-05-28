@@ -16,8 +16,8 @@ const App: React.FC = () => {
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
-        tabBarActiveTintColor: 'white', // Set active tab name to white
-        tabBarInactiveTintColor: 'white', // Set inactive tab name to white
+        tabBarActiveTintColor: 'white', // Active tab name is white
+        tabBarInactiveTintColor: '#000000', // Inactive tab name is black
         tabBarStyle: styles.tabBar,
         tabBarBackground: () => (
           <BlurView
