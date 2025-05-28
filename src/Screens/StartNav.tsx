@@ -1,6 +1,7 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {StyleSheet, Image, Text} from 'react-native';
+import {StyleSheet, Image, Text, View} from 'react-native';
+import {BlurView} from '@react-native-community/blur';
 import DUNOScreen from './DUNOScreen';
 import SMOScreen from './SMOScreen';
 import WEBUIUXScreen from './WEBUIUXScreen';
@@ -17,6 +18,14 @@ const App: React.FC = () => {
       screenOptions={({route}) => ({
         tabBarActiveTintColor: 'black',
         tabBarStyle: styles.tabBar,
+        tabBarBackground: () => (
+          <BlurView
+            style={StyleSheet.absoluteFill}
+            blurType="light"
+            blurAmount={15}
+            reducedTransparencyFallbackColor="white"
+          />
+        ),
       })}>
       <Tab.Screen
         name="Duno"
