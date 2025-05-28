@@ -61,12 +61,15 @@ const styles = StyleSheet.create({
     bottom: 20,
     height: hp('5%'),
     width: wp('90%'),
-    backgroundColor: '#fff',
+    backgroundColor: 'transparent', // Make tab bar transparent
     borderRadius: 15,
     alignSelf: 'center',
     overflow: 'hidden',
-
     marginHorizontal: 30,
+    // Remove shadow and border for full transparency
+    borderTopWidth: 0,
+    elevation: 0,
+    shadowOpacity: 0,
   },
 });
 
