@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, SafeAreaView, Text} from 'react-native';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 // Try both import methods - use whichever works
 import Video from 'react-native-video';
@@ -43,16 +44,25 @@ const App = () => {
   );
 };
 
+
 const styles = StyleSheet.create({
-  container: {flex: 1},
-  video: {flex: 1},
+  container: { 
+    flex: 1,
+    backgroundColor: 'black' // Add background to debug
+  },
+  video: {
+    width: '100%',  // Use explicit dimensions
+    height: '100%',
+    backgroundColor: 'transparent'
+  },
   viewbox: {
     backgroundColor: '#FFFFFF',
-    height: '45%',
-    width: '95%',
+    height: hp('45%'),
+    width: wp('95%'),
     borderRadius: 20,
     alignSelf: 'center',
     marginTop: 40,
+    overflow: 'hidden' // Ensure video stays within bounds
   },
 });
 
