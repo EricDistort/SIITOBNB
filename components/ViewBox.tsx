@@ -11,7 +11,9 @@ const App = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.viewbox}>
         <Video
-          source={require('../media/dilight.mp4')}
+          source={{
+            uri: 'https://raw.githubusercontent.com/EricDistort/raw/main/Black%20Sand%20Logo%20Reveal_free%20(online-video-cutter.com).mp4', // ← Replace with your URL
+          }}
           style={styles.video}
           controls
           resizeMode="contain"
