@@ -1,33 +1,12 @@
 import React from 'react';
-import {View, StyleSheet, SafeAreaView, Text} from 'react-native';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-
-// Try both import methods - use whichever works
+import {View, StyleSheet, SafeAreaView} from 'react-native';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 import Video from 'react-native-video';
-// or
-// import Video from 'react-native-video/Video';
 
 const App = () => {
-  // First verify the Video component exists
-  console.log('Video component:', Video);
-
-  // Then verify the video file exists
-  try {
-    console.log('Video path:', require.resolve('../media/dilight.mp4'));
-  } catch (e) {
-    console.log('Video path error:', e);
-  }
-
-  if (!Video) {
-    return (
-      <SafeAreaView style={styles.container}>
-        <Text style={{color: 'red'}}>
-          Video component not found! Check your react-native-video installation.
-        </Text>
-      </SafeAreaView>
-    );
-  }
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.viewbox}>
@@ -37,32 +16,33 @@ const App = () => {
           controls
           resizeMode="contain"
           paused={false}
-          onError={error => console.log('Video error:', error)}
         />
       </View>
     </SafeAreaView>
   );
 };
 
-
 const styles = StyleSheet.create({
-  container: { 
+  container: {
     flex: 1,
-    backgroundColor: 'black' // Add background to debug
+    backgroundColor: 'black',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   video: {
-    width: '100%',  // Use explicit dimensions
+    width: '100%',
     height: '100%',
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
   },
   viewbox: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#000000',
     height: hp('45%'),
     width: wp('95%'),
     borderRadius: 20,
+    borderColor: '#ffffff',
+    borderWidth: 1,
     alignSelf: 'center',
-    marginTop: 40,
-    overflow: 'hidden' // Ensure video stays within bounds
+    overflow: 'hidden',
   },
 });
 
