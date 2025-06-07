@@ -1,140 +1,191 @@
+import React, {useState} from 'react';
 import {
   SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
+  View,
   Text,
   TextInput,
   TouchableOpacity,
-  View,
+  StyleSheet,
+  Alert,
 } from 'react-native';
-import React, {useState} from 'react';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RootStackParamList} from '../types';
-import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {useNavigation, NavigationProp} from '@react-navigation/native';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import LinearGradient from 'react-native-linear-gradient';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
+const SHEET_API_URL = 'https://sheetdb.io/api/v1/q44dokc0xmncc';
 
-type Props = {
-  navigation: HomeScreenNavigationProp;
+type RootStackParamList = {
+  StartNav: undefined;
+  // add other routes here if needed
 };
 
-export default function Home() {
-  const navigation = useNavigation<NavigationProp>();
-  const [firstText, setFirstText] = useState('');
-  const [secondText, setSecondText] = useState('');
+export default function LoginRegister() {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+
+  const navigateToApp = () => {
+    navigation.navigate('StartNav');
+  };
+
+  const handleRegister = async () => {
+    if (!username || !password) {
+      return Alert.alert('Fill all fields');
+    }
+    try {
+      // Check if username already exists first
+      const checkRes = await fetch(
+        `${SHEET_API_URL}/search?username=${username}`,
+      );
+      const existingUsers = await checkRes.json();
+
+      if (existingUsers.length > 0) {
+        return Alert.alert('User already exists');
+      }
+
+      // Register new user
+      const res = await fetch(SHEET_API_URL, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          data: [{username, password}],
+        }),
+      });
+      if (res.ok) {
+        Alert.alert('Registered successfully!');
+        navigateToApp();
+      } else {
+        Alert.alert('Registration failed');
+      }
+    } catch (error) {
+      Alert.alert('Error registering user');
+    }
+  };
+
+  const handleLogin = async () => {
+    if (!username || !password) {
+      return Alert.alert('Fill all fields');
+    }
+    try {
+      const res = await fetch(`${SHEET_API_URL}/search?username=${username}`);
+      const data = await res.json();
+      if (data.length && data[0].password === password) {
+        Alert.alert('Login successful!');
+        navigateToApp();
+      } else {
+        Alert.alert('Invalid credentials');
+      }
+    } catch (error) {
+      Alert.alert('Login error');
+    }
+  };
 
   return (
-    <SafeAreaView style={styles.main}>
-      <StatusBar backgroundColor="#000000" barStyle="light-content" />
-      <View style={styles.container}>
-        <View style={styles.userinfo}>
-          <View style={styles.username}>
-            <Text style={styles.usernametitle}>Username</Text>
-            <TextInput
-              style={styles.usernamebox}
-              placeholder="Type here..."
-              value={firstText}
-              onChangeText={setFirstText}
-            />
-          </View>
-          <View style={styles.password}>
-            <Text style={styles.passwordtitle}>Password</Text>
-            <TextInput
-              style={styles.passwordbox}
-              placeholder="Type here..."
-              value={secondText}
-              onChangeText={setSecondText}
-            />
-          </View>
-        </View>
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>Login / Register</Text>
+      <TextInput
+        placeholder="Username"
+        style={styles.input}
+        value={username}
+        onChangeText={setUsername}
+        autoCapitalize="none"
+        placeholderTextColor="grey"
+      />
+      <View style={styles.passwordContainer}>
+        <TextInput
+          placeholder="Password"
+          style={[styles.input, {marginBottom: 0, flex: 1}]}
+          value={password}
+          secureTextEntry={!showPassword}
+          onChangeText={setPassword}
+          autoCapitalize="none"
+          placeholderTextColor="grey"
+        />
         <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate('Home')}>
-          <Text style={styles.continuetitle}>Continue</Text>
+          onPress={() => setShowPassword(!showPassword)}
+          style={styles.eyeIcon}
+          activeOpacity={0.7}>
+          <Icon
+            name={showPassword ? 'eye-off-outline' : 'eye-outline'}
+            size={22}
+            color="#fff"
+          />
+        </TouchableOpacity>
+      </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity onPress={handleLogin} style={{width: '48%'}}>
+          <LinearGradient
+            colors={['#B993D6', '#8CA6DB', '#B993D6']}
+            start={{x: 0, y: 0}}
+            end={{x: 1, y: 0}}
+            style={styles.button}>
+            <Text style={styles.btntxt}>Login</Text>
+          </LinearGradient>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleRegister} style={{width: '48%'}}>
+          <LinearGradient
+            colors={['#B993D6', '#8CA6DB', '#B993D6']}
+            start={{x: 0, y: 0}}
+            end={{x: 1, y: 0}}
+            style={styles.button}>
+            <Text style={styles.btntxt}>Register</Text>
+          </LinearGradient>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
 }
+
 const styles = StyleSheet.create({
-  main: {
-    backgroundColor: '#000000',
+  container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: moderateScale(40),
-    overflow: 'hidden',
+    backgroundColor: '#000',
+    padding: scale(10),
   },
-
-  container: {
-    borderWidth: 0.5,
-    borderColor: 'rgba(255, 196, 0, 0.99)',
-    backgroundColor: 'rgba(255, 255, 255, 0.17)',
-    height: verticalScale(400),
-    width: scale(300),
-    justifyContent: 'space-evenly',
+  title: {
+    fontSize: moderateScale(24),
+    marginBottom: verticalScale(20),
+    color: '#fff',
+  },
+  input: {
+    width: '80%',
+    paddingVertical: moderateScale(8),
+    marginBottom: verticalScale(10),
+    backgroundColor: 'transparent', // Remove box background
+    color: '#fff',
+    borderRadius: 0,
+    fontSize: moderateScale(16),
+    borderBottomWidth: 0.5, // Add a simple line
+    borderBottomColor: '#fff', // White line
+  },
+  passwordContainer: {
+    flexDirection: 'row',
     alignItems: 'center',
-    borderRadius: moderateScale(20),
+    width: '80%',
+    marginBottom: verticalScale(10),
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#fff',
   },
-
+  eyeIcon: {
+    padding: 8,
+  },
   button: {
-    height: verticalScale(50),
-    width: scale(250),
-    backgroundColor: 'rgb(255, 174, 0)',
-    borderRadius: moderateScale(50),
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  userinfo: {
-    justifyContent: 'space-evenly',
-    height: verticalScale(150),
+    padding: moderateScale(12),
+    borderRadius: moderateScale(6),
+    marginTop: verticalScale(10),
     alignItems: 'center',
   },
+  btntxt: {color: '#fff', fontWeight: 'bold', fontSize: moderateScale(16)},
 
-  username: {
-    justifyContent: 'space-evenly',
-
-    height: verticalScale(80),
-  },
-
-  usernametitle: {
-    color: '#FFFFFF',
-    fontSize: moderateScale(15),
-  },
-  usernamebox: {
-    width: scale(250),
-    height: verticalScale(35),
-    borderColor: 'rgb(255, 174, 0)',
-    borderWidth: 0.5,
-    borderRadius: moderateScale(5),
-    backgroundColor: '#000000',
-    color: '#FFFFFF',
-  },
-  password: {
-    justifyContent: 'space-evenly',
-
-    height: verticalScale(80),
-  },
-
-  passwordtitle: {
-    color: '#FFFFFF',
-    fontSize: moderateScale(15),
-  },
-  passwordbox: {
-    width: scale(250),
-    height: verticalScale(35),
-    borderColor: 'rgb(255, 174, 0)',
-    borderWidth: 0.5,
-    borderRadius: moderateScale(5),
-    backgroundColor: '#000000',
-    color: '#FFFFFF',
-  },
-  continuetitle: {
-    fontSize: moderateScale(18),
-
-    fontWeight: 'bold',
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '80%',
+    alignItems: 'center',
+    marginTop: verticalScale(10),
   },
 });
