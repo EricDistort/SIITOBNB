@@ -11,7 +11,6 @@ import {
 import {useNavigation, NavigationProp} from '@react-navigation/native';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import LinearGradient from 'react-native-linear-gradient';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const SHEET_API_URL = 'https://sheetdb.io/api/v1/q44dokc0xmncc';
 
@@ -24,7 +23,6 @@ export default function LoginRegister() {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
 
   const navigateToApp = () => {
     navigation.navigate('StartNav');
@@ -93,27 +91,15 @@ export default function LoginRegister() {
         autoCapitalize="none"
         placeholderTextColor="grey"
       />
-      <View style={styles.passwordContainer}>
-        <TextInput
-          placeholder="Password"
-          style={[styles.input, {marginBottom: 0, flex: 1}]}
-          value={password}
-          secureTextEntry={!showPassword}
-          onChangeText={setPassword}
-          autoCapitalize="none"
-          placeholderTextColor="grey"
-        />
-        <TouchableOpacity
-          onPress={() => setShowPassword(!showPassword)}
-          style={styles.eyeIcon}
-          activeOpacity={0.7}>
-          <Icon
-            name={showPassword ? 'eye-off-outline' : 'eye-outline'}
-            size={22}
-            color="#fff"
-          />
-        </TouchableOpacity>
-      </View>
+      <TextInput
+        placeholder="Password"
+        style={styles.input}
+        value={password}
+        secureTextEntry
+        onChangeText={setPassword}
+        autoCapitalize="none"
+        placeholderTextColor="grey"
+      />
       <View style={styles.buttonContainer}>
         <TouchableOpacity onPress={handleLogin} style={{width: '48%'}}>
           <LinearGradient
@@ -156,22 +142,11 @@ const styles = StyleSheet.create({
     paddingVertical: moderateScale(8),
     marginBottom: verticalScale(10),
     backgroundColor: 'transparent', // Remove box background
-    color: '#fff',
+    color: 'grey',
     borderRadius: 0,
     fontSize: moderateScale(16),
     borderBottomWidth: 0.5, // Add a simple line
     borderBottomColor: '#fff', // White line
-  },
-  passwordContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: '80%',
-    marginBottom: verticalScale(10),
-    borderBottomWidth: 0.5,
-    borderBottomColor: '#fff',
-  },
-  eyeIcon: {
-    padding: 8,
   },
   button: {
     padding: moderateScale(12),
@@ -189,3 +164,6 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(10),
   },
 });
+
+
+
