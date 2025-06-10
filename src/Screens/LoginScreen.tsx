@@ -29,7 +29,9 @@ export default function LoginRegister() {
   const handleRegister = async () => {
     if (!username || !password) return Alert.alert('Fill all fields');
     try {
-      const checkRes = await fetch(`${SHEET_API_URL}/search?username=${username}`);
+      const checkRes = await fetch(
+        `${SHEET_API_URL}/search?username=${username}`,
+      );
       const existingUsers = await checkRes.json();
 
       if (existingUsers.length > 0) return Alert.alert('User already exists');
@@ -71,46 +73,48 @@ export default function LoginRegister() {
     <ImageBackground
       source={require('../../media/background.jpg')} // adjust the path based on your file structure
       style={styles.background}
-      resizeMode="cover"
-    >
-      <SafeAreaView style={styles.container}>
-        <Text style={styles.title}>Login / Register</Text>
-        <TextInput
-          placeholder="Username"
-          style={styles.input}
-          value={username}
-          onChangeText={setUsername}
-          autoCapitalize="none"
-          placeholderTextColor="grey"
-        />
-        <TextInput
-          placeholder="Password"
-          style={styles.input}
-          value={password}
-          secureTextEntry
-          onChangeText={setPassword}
-          autoCapitalize="none"
-          placeholderTextColor="grey"
-        />
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity onPress={handleLogin} style={{width: '48%'}}>
-            <LinearGradient
-              colors={['#B993D6', '#8CA6DB', '#B993D6']}
-              start={{x: 0, y: 0}}
-              end={{x: 1, y: 0}}
-              style={styles.button}>
-              <Text style={styles.btntxt}>Login</Text>
-            </LinearGradient>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleRegister} style={{width: '48%'}}>
-            <LinearGradient
-              colors={['#B993D6', '#8CA6DB', '#B993D6']}
-              start={{x: 0, y: 0}}
-              end={{x: 1, y: 0}}
-              style={styles.button}>
-              <Text style={styles.btntxt}>Register</Text>
-            </LinearGradient>
-          </TouchableOpacity>
+      resizeMode="cover">
+      <SafeAreaView
+        style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <View style={styles.container}>
+          <Text style={styles.title}>Login / Register</Text>
+          <TextInput
+            placeholder="Username"
+            style={styles.input}
+            value={username}
+            onChangeText={setUsername}
+            autoCapitalize="none"
+            placeholderTextColor="grey"
+          />
+          <TextInput
+            placeholder="Password"
+            style={styles.input}
+            value={password}
+            secureTextEntry
+            onChangeText={setPassword}
+            autoCapitalize="none"
+            placeholderTextColor="grey"
+          />
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity onPress={handleLogin} style={{width: '48%'}}>
+              <LinearGradient
+                colors={['#8CA6DB', '#B993D6']}
+                start={{x: 0, y: 0}}
+                end={{x: 1, y: 0}}
+                style={styles.button}>
+                <Text style={styles.btntxt}>Login</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handleRegister} style={{width: '48%'}}>
+              <LinearGradient
+                colors={['#8CA6DB', '#B993D6']}
+                start={{x: 0, y: 0}}
+                end={{x: 1, y: 0}}
+                style={styles.button}>
+                <Text style={styles.btntxt}>Register</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+          </View>
         </View>
       </SafeAreaView>
     </ImageBackground>
@@ -124,10 +128,15 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   container: {
-    flex: 1,
+    //flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    alignSelf: 'center',
     padding: scale(10),
+    backgroundColor: 'rgba(255, 255, 255, 0.14)',
+    height: '50%',
+    width: '80%',
+    borderRadius: moderateScale(10), // semi-transparent background
   },
   title: {
     fontSize: moderateScale(24),

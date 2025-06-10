@@ -3,13 +3,12 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {StyleSheet, Image, Text, View} from 'react-native';
 import {BlurView} from '@react-native-community/blur';
 import DUNOScreen from './DUNOScreen';
-import LogsScreen from './LogsScreen';
+
 import ProfileScreen from './ProfileScreen';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-
 
 const Tab = createBottomTabNavigator();
 
@@ -40,14 +39,6 @@ const App: React.FC = () => {
       <Tab.Screen
         name="Profile"
         component={ProfileScreen}
-        options={{
-          headerShown: false,
-          tabBarIcon: () => null,
-        }}
-      />
-      <Tab.Screen
-        name="Logs"
-        component={LogsScreen}
         options={{
           headerShown: false,
           tabBarIcon: () => null,

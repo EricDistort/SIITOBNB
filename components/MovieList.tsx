@@ -56,11 +56,11 @@ export default function ContactList() {
 const styles = StyleSheet.create({
   container: {
     padding: moderateScale(10),
-    backgroundColor: '#000000',
+    backgroundColor: 'rgba(0, 0, 0, 0.45)',
     height: verticalScale(220),
-    width: scale(300),
+    width: '100%',
     borderRadius: moderateScale(20),
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: 'grey',
   },
   contacts: {
@@ -91,7 +91,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
     height: verticalScale(200),
-    marginBottom: moderateScale(40),
+    padding: 20
+    
+    //marginBottom: moderateScale(40),
   },
   time: {
     fontSize: moderateScale(14),

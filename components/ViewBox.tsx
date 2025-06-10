@@ -142,12 +142,12 @@ const styles = StyleSheet.create({
   center: {flex: 1, justifyContent: 'center', alignItems: 'center'},
   video: {flex: 1},
   viewbox: {
-    backgroundColor: '#000000',
+    backgroundColor: 'rgba(255, 255, 255, 0.07)',
     height: hp('45%'),
     width: wp('95%'),
     borderRadius: 20,
     alignSelf: 'center',
-    marginTop: 40,
+    margin: 20,
   },
 });
 

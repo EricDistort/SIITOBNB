@@ -40,7 +40,7 @@ export default function Welcome() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'transparent',
-    height: hp('10%'),
+    height: hp('8%'),
     justifyContent: 'center',
   },
 
@@ -56,14 +56,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     overflow: 'hidden',
     alignItems: 'center',
-    marginTop: 15,
+    marginTop: 2,
   },
-  viewbox: {
-    backgroundColor: '#FFFFFF',
-    height: hp('45%'),
-    width: wp('95%'),
-    borderRadius: 20,
-    alignSelf: 'center',
-    marginTop: 40,
-  },
+  
 });
