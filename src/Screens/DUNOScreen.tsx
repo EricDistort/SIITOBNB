@@ -12,7 +12,6 @@ export default function Home() {
       source={require('../../media/background.jpg')} // adjust the path based on your file structure
       style={styles.background}
       resizeMode="cover">
-
       <StatusBar backgroundColor="#000000" barStyle="light-content" />
       <ScrollView showsVerticalScrollIndicator={false}>
         <Welcome />
