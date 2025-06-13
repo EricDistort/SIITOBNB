@@ -43,7 +43,6 @@ export default function LoginRegister() {
       });
 
       if (res.ok) {
-        Alert.alert('Registered successfully!');
         navigateToApp();
       } else {
         Alert.alert('Registration failed');
@@ -59,7 +58,6 @@ export default function LoginRegister() {
       const res = await fetch(`${SHEET_API_URL}/search?username=${username}`);
       const data = await res.json();
       if (data.length && data[0].password === password) {
-        Alert.alert('Login successful!');
         navigateToApp();
       } else {
         Alert.alert('Invalid credentials');
@@ -71,11 +69,16 @@ export default function LoginRegister() {
 
   return (
     <ImageBackground
-      source={require('../../media/background.jpg')} // adjust the path based on your file structure
+      source={require('../../media/background.jpg')}
       style={styles.background}
       resizeMode="cover">
       <SafeAreaView
-        style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: moderateScale(8),
+        }}>
         <View style={styles.container}>
           <Text style={styles.title}>Login / Register</Text>
           <TextInput
@@ -128,48 +131,47 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   container: {
-    //flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
-    padding: scale(10),
+    padding: scale(14),
     backgroundColor: 'rgba(255, 255, 255, 0.14)',
-    height: '50%',
-    width: '80%',
-    borderRadius: moderateScale(10), // semi-transparent background
+    height: verticalScale(340),
+    width: scale(320),
+    borderRadius: moderateScale(14),
   },
   title: {
-    fontSize: moderateScale(24),
-    marginBottom: verticalScale(20),
+    fontSize: moderateScale(26),
+    marginBottom: verticalScale(22),
     color: '#fff',
   },
   input: {
     width: '80%',
-    paddingVertical: moderateScale(8),
-    marginBottom: verticalScale(10),
+    paddingVertical: moderateScale(10),
+    marginBottom: verticalScale(12),
     backgroundColor: 'transparent',
     color: '#fff',
-    borderRadius: 0,
-    fontSize: moderateScale(16),
+    borderRadius: moderateScale(4),
+    fontSize: moderateScale(17),
     borderBottomWidth: 0.5,
     borderBottomColor: '#fff',
   },
   button: {
-    padding: moderateScale(12),
-    borderRadius: moderateScale(6),
-    marginTop: verticalScale(10),
+    padding: moderateScale(14),
+    borderRadius: moderateScale(8),
+    marginTop: verticalScale(12),
     alignItems: 'center',
   },
   btntxt: {
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: moderateScale(16),
+    fontSize: moderateScale(17),
   },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '80%',
     alignItems: 'center',
-    marginTop: verticalScale(10),
+    marginTop: verticalScale(12),
   },
 });

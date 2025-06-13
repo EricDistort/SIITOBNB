@@ -3,10 +3,7 @@ import {View, StyleSheet, ActivityIndicator} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Video from 'react-native-video';
 import LottieView from 'lottie-react-native';
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 
 const scheduleUrl =
   'https://raw.githubusercontent.com/EricDistort/raw/main/schedule.json';
@@ -139,15 +136,24 @@ const App = () => {
 
 const styles = StyleSheet.create({
   container: {flex: 1},
-  center: {flex: 1, justifyContent: 'center', alignItems: 'center'},
-  video: {flex: 1},
+  center: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: moderateScale(10),
+  },
+  video: {
+    flex: 1,
+  },
   viewbox: {
-    backgroundColor: 'rgba(255, 255, 255, 0.07)',
-    height: hp('45%'),
-    width: wp('95%'),
-    borderRadius: 20,
+    backgroundColor: 'rgb(0, 0, 0)',
+    height: verticalScale(300),
+    width: '100%',
+    borderRadius: moderateScale(10),
     alignSelf: 'center',
-    margin: 20,
+    margin: moderateScale(20),
+    overflow: 'hidden',
+    
   },
 });
 

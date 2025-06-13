@@ -33,36 +33,28 @@ export default function ContactList() {
 
   return (
     <SafeAreaView style={styles.main}>
-      <View style={styles.container}>
-        <ScrollView nestedScrollEnabled showsVerticalScrollIndicator={false}>
-          {contacts.map(({uid, name, cast, time, poster}) => (
-            <View key={uid} style={styles.contacts}>
-              <Image source={{uri: poster}} style={styles.poster} />
-              <View style={styles.nameplate}>
-                <Text style={styles.moviename}>{name}</Text>
-                <Text style={styles.cast}>{cast}</Text>
-              </View>
-              <View style={styles.timebar}>
-                <Text style={styles.time}>{time}</Text>
-              </View>
+      <ScrollView
+        nestedScrollEnabled
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{paddingBottom: verticalScale(10)}}>
+        {contacts.map(({id, name, cast, time, poster}) => (
+          <View key={id} style={styles.contacts}>
+            <Image source={{uri: poster}} style={styles.poster} />
+            <View style={styles.nameplate}>
+              <Text style={styles.moviename}>{String(name || '')}</Text>
+              <Text style={styles.cast}>{String(cast || '')}</Text>
             </View>
-          ))}
-        </ScrollView>
-      </View>
+            <View style={styles.timebar}>
+              <Text style={styles.time}>{String(time || '')}</Text>
+            </View>
+          </View>
+        ))}
+      </ScrollView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    padding: moderateScale(10),
-    backgroundColor: 'rgba(0, 0, 0, 0.45)',
-    height: verticalScale(220),
-    width: '100%',
-    borderRadius: moderateScale(20),
-    borderWidth: 1,
-    borderColor: 'grey',
-  },
   contacts: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -86,20 +78,27 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(14),
     fontWeight: 'bold',
   },
-  cast: {},
+  cast: {
+    fontSize: moderateScale(12),
+    color: '#555',
+    marginTop: verticalScale(2),
+  },
   main: {
     justifyContent: 'space-evenly',
-    alignItems: 'center',
-    height: verticalScale(200),
-    padding: 20
-    
-    //marginBottom: moderateScale(40),
+    height: verticalScale(250),
+    backgroundColor: 'rgba(0, 0, 0, 0)',
+    padding: moderateScale(10),
+    width: '100%',
+    flex: 1,
+    overflow: 'hidden',
   },
   time: {
     fontSize: moderateScale(14),
+    color: '#888',
   },
   timebar: {
     justifyContent: 'center',
     alignItems: 'flex-end',
+    marginLeft: moderateScale(8),
   },
 });
