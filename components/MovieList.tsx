@@ -27,7 +27,7 @@ export default function ContactList() {
 
   useEffect(() => {
     fetchData();
-    const intervalId = setInterval(fetchData, 1000);
+    const intervalId = setInterval(fetchData, 10000);
     return () => clearInterval(intervalId);
   }, []);
 
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   },
   main: {
     justifyContent: 'space-evenly',
-    height: verticalScale(250),
+    height: verticalScale(240),
     backgroundColor: 'rgba(0, 0, 0, 0)',
     padding: moderateScale(10),
     width: '100%',
