@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: moderateScale(10),
     margin: moderateScale(5),
-    backgroundColor: '#FFFFFF',
+    backgroundColor: 'rgba(255, 255, 255, 0.11)',
     borderRadius: moderateScale(10),
   },
   poster: {
@@ -69,6 +69,8 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(5),
     resizeMode: 'cover',
     overflow: 'hidden',
+    borderWidth: moderateScale(1),
+    borderColor: 'rgba(255, 255, 255, 0.57)',
   },
   nameplate: {
     marginLeft: moderateScale(10),
@@ -77,11 +79,12 @@ const styles = StyleSheet.create({
   moviename: {
     fontSize: moderateScale(14),
     fontWeight: 'bold',
+    color: 'rgba(255, 255, 255, 0.8)',
   },
   cast: {
-    fontSize: moderateScale(12),
-    color: '#555',
-    marginTop: verticalScale(2),
+    fontSize: moderateScale(10),
+    color: 'rgba(255, 255, 255, 0.51)',
+    marginTop: verticalScale(1),
   },
   main: {
     justifyContent: 'space-evenly',
@@ -94,7 +97,7 @@ const styles = StyleSheet.create({
   },
   time: {
     fontSize: moderateScale(14),
-    color: '#888',
+    color: 'rgb(250, 250, 250)',
   },
   timebar: {
     justifyContent: 'center',
