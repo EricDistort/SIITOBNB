@@ -13,7 +13,7 @@ const App: React.FC = () => {
     <Tab.Navigator
       screenOptions={({route}) => ({
         tabBarActiveTintColor: 'white',
-        tabBarInactiveTintColor: 'grey',
+        tabBarInactiveTintColor: 'black',
         tabBarStyle: styles.tabBar,
         tabBarBackground: () => (
           <BlurView

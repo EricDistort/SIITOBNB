@@ -1,5 +1,13 @@
 import React, {useEffect, useState, useRef} from 'react';
-import {View, StyleSheet, ActivityIndicator} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  ActivityIndicator,
+  TouchableOpacity,
+  Image,
+  AppState,
+  AppStateStatus,
+} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Video from 'react-native-video';
 import LottieView from 'lottie-react-native';
@@ -8,7 +16,6 @@ import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 const scheduleUrl =
   'https://raw.githubusercontent.com/EricDistort/raw/main/schedule.json';
 
-// Updated to use seconds
 function timeToSeconds(time: string) {
   const [hours, minutes] = time.split(':').map(Number);
   return (hours * 60 + minutes) * 60;
@@ -22,6 +29,7 @@ const App = () => {
   const [currentMovie, setCurrentMovie] = useState<any>(null);
   const [paused, setPaused] = useState<boolean>(true);
   const lastMovieUrl = useRef<string | null>(null);
+  const [shouldSeek, setShouldSeek] = useState(false);
 
   // Fetch schedule every 10 seconds
   useEffect(() => {
@@ -71,6 +79,7 @@ const App = () => {
         setCurrentMovie(foundMovie);
         setSeekTo(calculatedSeekTo);
         setPaused(foundMovie ? false : true);
+        setShouldSeek(true);
         lastMovieUrl.current = foundMovie?.url || null;
       }
     };
@@ -80,12 +89,42 @@ const App = () => {
     return () => clearInterval(timerId);
   }, [schedule]);
 
-  // Seek to correct time when movie or seekTo updates
+  // Handle app state changes to resync video position
   useEffect(() => {
-    if (videoRef.current && seekTo > 0) {
-      videoRef.current.seek(seekTo);
+    const handleAppStateChange = (nextAppState: AppStateStatus) => {
+      if (nextAppState === 'active' && currentMovie) {
+        // Recalculate seekTo based on current time
+        const now = new Date();
+        const currentSeconds =
+          now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+        const start = timeToSeconds(currentMovie.startTime);
+        const newSeekTo = currentSeconds - start;
+        setSeekTo(newSeekTo > 0 ? newSeekTo : 0);
+
+        // Directly seek the video if loaded
+        if (videoRef.current && newSeekTo > 0) {
+          videoRef.current.seek(newSeekTo);
+        }
+      }
+    };
+
+    const subscription = AppState.addEventListener('change', handleAppStateChange);
+    return () => subscription.remove();
+  }, [currentMovie]);
+
+  // Fullscreen handler
+  const handleFullscreen = () => {
+    if (videoRef.current) {
+      // iOS
+      if (videoRef.current.presentFullscreenPlayer) {
+        videoRef.current.presentFullscreenPlayer();
+      }
+      // Android
+      if (videoRef.current.presentFullscreen) {
+        videoRef.current.presentFullscreen();
+      }
     }
-  }, [seekTo, currentMovie]);
+  };
 
   if (error) {
     return (
@@ -112,15 +151,32 @@ const App = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.viewbox}>
         {currentMovie?.url ? (
-          <Video
-            ref={videoRef}
-            source={{uri: currentMovie.url}}
-            style={styles.video}
-            controls
-            paused={paused}
-            resizeMode="contain"
-            repeat
-          />
+          <>
+            <Video
+              ref={videoRef}
+              source={{uri: currentMovie.url}}
+              style={styles.video}
+              controls={false}
+              paused={paused}
+              resizeMode="contain"
+              onLoad={() => {
+                if (shouldSeek && seekTo > 0 && videoRef.current) {
+                  videoRef.current.seek(seekTo);
+                  setShouldSeek(false);
+                }
+              }}
+            />
+            <TouchableOpacity
+              style={styles.fullscreenButton}
+              onPress={handleFullscreen}
+              activeOpacity={0.7}>
+              <Image
+                source={require('../media/fullscreen.png')}
+                style={styles.fullscreenIcon}
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
+          </>
         ) : (
           <LottieView
             source={require('../media/loading.json')}
@@ -136,6 +192,10 @@ const App = () => {
 
 const styles = StyleSheet.create({
   container: {flex: 1},
+  fullscreenIcon: {
+    width: moderateScale(18),
+    height: moderateScale(18),
+  },
   center: {
     flex: 1,
     justifyContent: 'center',
@@ -153,7 +213,16 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     margin: moderateScale(20),
     overflow: 'hidden',
-    
+    position: 'relative',
+  },
+  fullscreenButton: {
+    position: 'absolute',
+    bottom: moderateScale(6),
+    right: moderateScale(6),
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    borderRadius: moderateScale(10),
+    padding: moderateScale(2),
+    zIndex: 10,
   },
 });
 
