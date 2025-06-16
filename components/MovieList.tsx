@@ -9,8 +9,7 @@ import {
 import React, {useEffect, useState} from 'react';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 
-const DATA_URL =
-  'https://raw.githubusercontent.com/EricDistort/raw/main/movielist.json';
+const DATA_URL = 'https://sheetdb.io/api/v1/q44dokc0xmncc';
 
 export default function ContactList() {
   const [contacts, setContacts] = useState<any[]>([]);
@@ -60,7 +59,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: moderateScale(10),
     margin: moderateScale(5),
-    backgroundColor: 'rgba(255, 255, 255, 0.11)',
+    backgroundColor: 'rgba(39, 39, 39, 0.66)',
     borderRadius: moderateScale(10),
   },
   poster: {

@@ -1,11 +1,9 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-
 import {RootStackParamList} from './src/types';
-
-import StartNav from './src/Screens/StartNav';
 import LoginScreen from './src/Screens/LoginScreen';
+import DUNOScreen from './src/Screens/DUNOScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -16,15 +14,15 @@ const App = () => {
         screenOptions={{
           animation: 'none',
         }}
-        initialRouteName="Details">
+        initialRouteName="Login">
         <Stack.Screen
-          name="Details"
+          name="Login"
           component={LoginScreen}
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="StartNav"
-          component={StartNav}
+          name="Duno"
+          component={DUNOScreen}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

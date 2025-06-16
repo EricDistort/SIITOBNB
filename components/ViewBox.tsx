@@ -14,7 +14,7 @@ import LottieView from 'lottie-react-native';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 
 const scheduleUrl =
-  'https://raw.githubusercontent.com/EricDistort/raw/main/schedule.json';
+  'https://sheetdb.io/api/v1/q44dokc0xmncc';
 
 function timeToSeconds(time: string) {
   const [hours, minutes] = time.split(':').map(Number);

@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <SafeAreaView style={styles.main}>
       <ImageBackground
-        source={require('../../media/background.jpg')}
+        source={require('../../media/background.png')}
         style={styles.background}
         resizeMode="cover">
         <StatusBar backgroundColor="#000000" barStyle="light-content" />

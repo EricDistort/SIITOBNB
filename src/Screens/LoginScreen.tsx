@@ -16,7 +16,7 @@ import LinearGradient from 'react-native-linear-gradient';
 const SHEET_API_URL = 'https://sheetdb.io/api/v1/q44dokc0xmncc';
 
 type RootStackParamList = {
-  StartNav: undefined;
+  Duno: undefined;
 };
 
 export default function LoginRegister() {
@@ -24,7 +24,7 @@ export default function LoginRegister() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const navigateToApp = () => navigation.navigate('StartNav');
+  const navigateToApp = () => navigation.navigate('Duno');
 
   const handleRegister = async () => {
     if (!username || !password) return Alert.alert('Fill all fields');
@@ -69,7 +69,7 @@ export default function LoginRegister() {
 
   return (
     <ImageBackground
-      source={require('../../media/background.jpg')}
+      source={require('../../media/background.png')}
       style={styles.background}
       resizeMode="cover">
       <SafeAreaView
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'center',
     padding: scale(14),
-    backgroundColor: 'rgba(255, 255, 255, 0.14)',
+    backgroundColor: 'rgba(34, 34, 34, 0.74)',
     height: verticalScale(340),
     width: scale(320),
     borderRadius: moderateScale(14),

@@ -6,7 +6,7 @@ import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 const ProfileScreen = () => {
   return (
     <ImageBackground
-      source={require('../../media/background.jpg')}
+      source={require('../../media/background.png')}
       style={styles.background}
       resizeMode="cover">
       <SafeAreaView style={styles.boundingbox}>

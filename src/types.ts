@@ -1,4 +1,4 @@
 export type RootStackParamList = {
-    StartNav: undefined;
-    Details: undefined;
+    Login: undefined;
+    Duno: undefined;
 };
