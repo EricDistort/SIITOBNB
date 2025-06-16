@@ -1,6 +1,6 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, useWindowDimensions, Platform} from 'react-native';
 import {BlurView} from '@react-native-community/blur';
 import DUNOScreen from './DUNOScreen';
 import ProfileScreen from './ProfileScreen';
@@ -9,12 +9,15 @@ import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 const Tab = createBottomTabNavigator();
 
 const App: React.FC = () => {
+  const {width, height} = useWindowDimensions();
+  const isLandscape = width > height || Platform.isTV;
+
   return (
     <Tab.Navigator
-      screenOptions={({route}) => ({
+      screenOptions={{
         tabBarActiveTintColor: 'white',
         tabBarInactiveTintColor: 'black',
-        tabBarStyle: styles.tabBar,
+        tabBarStyle: [styles.tabBar, isLandscape && {marginHorizontal: 300}],
         tabBarBackground: () => (
           <BlurView
             style={StyleSheet.absoluteFill}
@@ -23,7 +26,7 @@ const App: React.FC = () => {
             reducedTransparencyFallbackColor="white"
           />
         ),
-      })}>
+      }}>
       <Tab.Screen
         name="Duno"
         component={DUNOScreen}
