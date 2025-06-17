@@ -14,7 +14,7 @@ const App = () => {
         screenOptions={{
           animation: 'none',
         }}
-        initialRouteName="Login">
+        initialRouteName="Duno">
         <Stack.Screen
           name="Login"
           component={LoginScreen}

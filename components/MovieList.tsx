@@ -9,7 +9,7 @@ import {
 import React, {useEffect, useState} from 'react';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 
-const DATA_URL = 'https://sheetdb.io/api/v1/q44dokc0xmncc';
+const DATA_URL = 'https://raw.githubusercontent.com/EricDistort/raw/main/schedule.json';
 
 export default function ContactList() {
   const [contacts, setContacts] = useState<any[]>([]);

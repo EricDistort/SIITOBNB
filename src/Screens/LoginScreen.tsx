@@ -13,7 +13,7 @@ import {useNavigation, NavigationProp} from '@react-navigation/native';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import LinearGradient from 'react-native-linear-gradient';
 
-const SHEET_API_URL = 'https://sheetdb.io/api/v1/q44dokc0xmncc';
+const SHEET_API_URL = 'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLgsMrTIUoYPuwIQ1SWbKmmJGj8NIrWqq64RPt3gOaf10jLJLoMER7XUr77jP6ox1hzK33ZXkMn9p7XASm_aCaAQke3I7YLSFtj84kf5tbtbmHWd0CIvzDAZxABmFqq5eJuE0akhPzAbwKABf3PMKpKK5lk53871l0ucUN1n4y2h6PZCYOLfruHyS7LFoTlT3L7gQsOFKWWk44MbRFpk7j4OH-c0vVMONQ0GztjnB8imE6yjlq_zBjhuWRtWJGN2lznQsCtxT5143kXE_5NGj4l1DrLb_g&lib=ME-E8mFgtLHMJwd7P7FGhUN3lDsGkcowU';
 
 type RootStackParamList = {
   Duno: undefined;
