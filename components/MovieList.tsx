@@ -5,11 +5,14 @@ import {
   View,
   SafeAreaView,
   Image,
+  Platform,
+  TouchableOpacity,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 
-const DATA_URL = 'https://raw.githubusercontent.com/EricDistort/raw/main/schedule.json';
+const DATA_URL =
+  'https://raw.githubusercontent.com/EricDistort/raw/main/schedule.json';
 
 export default function ContactList() {
   const [contacts, setContacts] = useState<any[]>([]);
@@ -37,7 +40,14 @@ export default function ContactList() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{paddingBottom: verticalScale(10)}}>
         {contacts.map(({id, name, cast, time, poster}) => (
-          <View key={id} style={styles.contacts}>
+          <TouchableOpacity
+            key={id}
+            style={styles.contacts}
+            focusable={true}
+            hasTVPreferredFocus={id === 1} // First item gets initial focus on TV
+            activeOpacity={0.8}
+            onPress={() => {}} // Add your onPress logic if needed
+          >
             <Image source={{uri: poster}} style={styles.poster} />
             <View style={styles.nameplate}>
               <Text style={styles.moviename}>{String(name || '')}</Text>
@@ -46,7 +56,7 @@ export default function ContactList() {
             <View style={styles.timebar}>
               <Text style={styles.time}>{String(time || '')}</Text>
             </View>
-          </View>
+          </TouchableOpacity>
         ))}
       </ScrollView>
     </SafeAreaView>

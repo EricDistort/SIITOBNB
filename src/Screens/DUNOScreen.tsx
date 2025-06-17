@@ -4,6 +4,7 @@ import {
   ScrollView,
   StatusBar,
   StyleSheet,
+  Platform,
 } from 'react-native';
 import React from 'react';
 import Welcome from '../../components/Welcome';
@@ -25,6 +26,11 @@ export default function Home() {
             paddingVertical: verticalScale(10),
             paddingHorizontal: scale(8),
           }}>
+          {/* 
+            For TV navigation, ensure all interactive elements 
+            inside Welcome, ViewBox, and MovieList use 
+            focusable={true} and (optionally) hasTVPreferredFocus={true} 
+          */}
           <Welcome />
           <ViewBox />
           <MovieList />

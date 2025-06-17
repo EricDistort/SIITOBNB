@@ -7,6 +7,7 @@ import {
   Image,
   AppState,
   AppStateStatus,
+  Platform,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Video from 'react-native-video';
@@ -108,7 +109,10 @@ const App = () => {
       }
     };
 
-    const subscription = AppState.addEventListener('change', handleAppStateChange);
+    const subscription = AppState.addEventListener(
+      'change',
+      handleAppStateChange,
+    );
     return () => subscription.remove();
   }, [currentMovie]);
 
@@ -119,7 +123,7 @@ const App = () => {
       if (videoRef.current.presentFullscreenPlayer) {
         videoRef.current.presentFullscreenPlayer();
       }
-      // Android
+      // Android/TV
       if (videoRef.current.presentFullscreen) {
         videoRef.current.presentFullscreen();
       }
@@ -169,7 +173,10 @@ const App = () => {
             <TouchableOpacity
               style={styles.fullscreenButton}
               onPress={handleFullscreen}
-              activeOpacity={0.7}>
+              activeOpacity={0.7}
+              focusable={true}
+              hasTVPreferredFocus={true} // TV: this button will be focused first
+            >
               <Image
                 source={require('../media/fullscreen.png')}
                 style={styles.fullscreenIcon}

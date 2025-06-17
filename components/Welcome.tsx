@@ -10,6 +10,9 @@ export default function Welcome() {
         resizeMode="cover"
         style={styles.logo}
         source={require('../media/logo.png')}
+        accessible={true}
+        accessibilityLabel="App Logo"
+        // TV: images are not focusable, so nothing extra needed here
       />
       <View style={styles.line}>
         <Svg
