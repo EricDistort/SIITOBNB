@@ -22,6 +22,7 @@ export default function Home() {
         <StatusBar backgroundColor="#000000" barStyle="light-content" />
         <ScrollView
           showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
           contentContainerStyle={{
             paddingVertical: verticalScale(10),
             paddingHorizontal: scale(8),

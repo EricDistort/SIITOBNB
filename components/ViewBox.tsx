@@ -32,6 +32,9 @@ const App = () => {
   const lastMovieUrl = useRef<string | null>(null);
   const [shouldSeek, setShouldSeek] = useState(false);
 
+  // For TV focus highlight
+  const [isFullscreenFocused, setIsFullscreenFocused] = useState(false);
+
   // Fetch schedule every 10 seconds
   useEffect(() => {
     const fetchSchedule = () => {
@@ -130,6 +133,8 @@ const App = () => {
     }
   };
 
+  const isTV = Platform.isTV;
+
   if (error) {
     return (
       <SafeAreaView style={styles.center}>
@@ -171,12 +176,18 @@ const App = () => {
               }}
             />
             <TouchableOpacity
-              style={styles.fullscreenButton}
+              style={[
+                styles.fullscreenButton,
+                isTV && isFullscreenFocused && styles.focusedButton,
+              ]}
               onPress={handleFullscreen}
               activeOpacity={0.7}
-              focusable={true}
-              hasTVPreferredFocus={true} // TV: this button will be focused first
-            >
+              focusable={isTV}
+              hasTVPreferredFocus={isTV}
+              onFocus={() => setIsFullscreenFocused(true)}
+              onBlur={() => setIsFullscreenFocused(false)}
+              accessible={true}
+              accessibilityLabel="Fullscreen">
               <Image
                 source={require('../media/fullscreen.png')}
                 style={styles.fullscreenIcon}
@@ -200,8 +211,8 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {flex: 1},
   fullscreenIcon: {
-    width: moderateScale(18),
-    height: moderateScale(18),
+    width: moderateScale(25),
+    height: moderateScale(25),
   },
   center: {
     flex: 1,
@@ -221,15 +232,23 @@ const styles = StyleSheet.create({
     margin: moderateScale(20),
     overflow: 'hidden',
     position: 'relative',
+    borderWidth: 3,
+    borderColor: 'rgba(66, 66, 66, 0.29)',
   },
   fullscreenButton: {
     position: 'absolute',
-    bottom: moderateScale(6),
-    right: moderateScale(6),
+    bottom: moderateScale(1),
+    right: moderateScale(1),
     backgroundColor: 'rgba(0,0,0,0.5)',
-    borderRadius: moderateScale(10),
-    padding: moderateScale(2),
+    borderRadius: moderateScale(50),
+    padding: moderateScale(8),
     zIndex: 10,
+    borderWidth: 0,
+    borderColor: 'transparent',
+  },
+  focusedButton: {
+    borderWidth: 3,
+    borderColor: '#00ffff', // Cyan border when focused (TV only)
   },
 });
 

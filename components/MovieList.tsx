@@ -16,6 +16,8 @@ const DATA_URL =
 
 export default function ContactList() {
   const [contacts, setContacts] = useState<any[]>([]);
+  const [focusedId, setFocusedId] = useState<number | null>(null);
+  const isTV = Platform.isTV;
 
   const fetchData = async () => {
     try {
@@ -42,10 +44,15 @@ export default function ContactList() {
         {contacts.map(({id, name, cast, time, poster}) => (
           <TouchableOpacity
             key={id}
-            style={styles.contacts}
-            focusable={true}
-            hasTVPreferredFocus={id === 1} // First item gets initial focus on TV
+            style={[
+              styles.contacts,
+              isTV && focusedId === id && styles.focusedContact,
+            ]}
+            focusable={isTV}
+            hasTVPreferredFocus={isTV && id === 1}
             activeOpacity={0.8}
+            onFocus={() => setFocusedId(id)}
+            onBlur={() => setFocusedId(null)}
             onPress={() => {}} // Add your onPress logic if needed
           >
             <Image source={{uri: poster}} style={styles.poster} />
@@ -71,6 +78,12 @@ const styles = StyleSheet.create({
     margin: moderateScale(5),
     backgroundColor: 'rgba(39, 39, 39, 0.66)',
     borderRadius: moderateScale(10),
+    borderWidth: 0,
+    borderColor: 'transparent',
+  },
+  focusedContact: {
+    borderWidth: 3,
+    borderColor: '#00ffff', // Cyan border for TV focus
   },
   poster: {
     width: scale(60),
