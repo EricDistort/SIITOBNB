@@ -4,7 +4,6 @@ import {
   StyleSheet,
   ActivityIndicator,
   TouchableOpacity,
-  Image,
   AppState,
   AppStateStatus,
   Platform,
@@ -12,7 +11,9 @@ import {
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Video from 'react-native-video';
 import LottieView from 'lottie-react-native';
-import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {moderateScale, verticalScale} from 'react-native-size-matters';
+// Add this import for vector icons
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const scheduleUrl =
   'https://raw.githubusercontent.com/EricDistort/raw/main/schedule.json';
@@ -23,7 +24,7 @@ function timeToSeconds(time: string) {
 }
 
 const App = () => {
-  const [schedule, setSchedule] = useState<any[] | null>(null);
+  const [schedule, setSchedule] = useState<Record<string, any[]> | null>(null);
   const [error, setError] = useState<string | null>(null);
   const videoRef = useRef<Video>(null);
   const [seekTo, setSeekTo] = useState<number>(0);
@@ -31,22 +32,14 @@ const App = () => {
   const [paused, setPaused] = useState<boolean>(true);
   const lastMovieUrl = useRef<string | null>(null);
   const [shouldSeek, setShouldSeek] = useState(false);
-
-  // For TV focus highlight
   const [isFullscreenFocused, setIsFullscreenFocused] = useState(false);
+  const isTV = Platform.isTV;
 
-  // Fetch schedule every 10 seconds
   useEffect(() => {
     const fetchSchedule = () => {
       fetch(scheduleUrl)
-        .then(res => {
-          if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-          return res.json();
-        })
-        .then(data => {
-          if (Array.isArray(data)) setSchedule(data);
-          else throw new Error('Invalid schedule format');
-        })
+        .then(res => res.json())
+        .then(data => setSchedule(data))
         .catch(err => {
           console.error(err);
           setError(err.message);
@@ -58,18 +51,22 @@ const App = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  // Check current movie every second with second-precision logic
   useEffect(() => {
     if (!schedule) return;
 
     const checkCurrentMovie = () => {
       const now = new Date();
+      const day = now
+        .toLocaleDateString('en-US', {weekday: 'long'})
+        .toLowerCase();
+      const todaySchedule = schedule[day] || [];
+
       const currentSeconds =
         now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
       let foundMovie = null;
       let calculatedSeekTo = 0;
 
-      for (const movie of schedule) {
+      for (const movie of todaySchedule) {
         const start = timeToSeconds(movie.startTime);
         const end = start + movie.duration * 60;
         if (currentSeconds >= start && currentSeconds < end) {
@@ -82,7 +79,7 @@ const App = () => {
       if ((foundMovie?.url || null) !== lastMovieUrl.current) {
         setCurrentMovie(foundMovie);
         setSeekTo(calculatedSeekTo);
-        setPaused(foundMovie ? false : true);
+        setPaused(!foundMovie);
         setShouldSeek(true);
         lastMovieUrl.current = foundMovie?.url || null;
       }
@@ -93,19 +90,15 @@ const App = () => {
     return () => clearInterval(timerId);
   }, [schedule]);
 
-  // Handle app state changes to resync video position
   useEffect(() => {
     const handleAppStateChange = (nextAppState: AppStateStatus) => {
       if (nextAppState === 'active' && currentMovie) {
-        // Recalculate seekTo based on current time
         const now = new Date();
         const currentSeconds =
           now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
         const start = timeToSeconds(currentMovie.startTime);
         const newSeekTo = currentSeconds - start;
         setSeekTo(newSeekTo > 0 ? newSeekTo : 0);
-
-        // Directly seek the video if loaded
         if (videoRef.current && newSeekTo > 0) {
           videoRef.current.seek(newSeekTo);
         }
@@ -119,21 +112,12 @@ const App = () => {
     return () => subscription.remove();
   }, [currentMovie]);
 
-  // Fullscreen handler
   const handleFullscreen = () => {
     if (videoRef.current) {
-      // iOS
-      if (videoRef.current.presentFullscreenPlayer) {
-        videoRef.current.presentFullscreenPlayer();
-      }
-      // Android/TV
-      if (videoRef.current.presentFullscreen) {
-        videoRef.current.presentFullscreen();
-      }
+      videoRef.current.presentFullscreenPlayer?.();
+      videoRef.current.presentFullscreen?.();
     }
   };
-
-  const isTV = Platform.isTV;
 
   if (error) {
     return (
@@ -186,13 +170,9 @@ const App = () => {
               hasTVPreferredFocus={isTV}
               onFocus={() => setIsFullscreenFocused(true)}
               onBlur={() => setIsFullscreenFocused(false)}
-              accessible={true}
+              accessible
               accessibilityLabel="Fullscreen">
-              <Image
-                source={require('../media/fullscreen.png')}
-                style={styles.fullscreenIcon}
-                resizeMode="contain"
-              />
+              <Icon name="fullscreen" size={28} color="#fff" />
             </TouchableOpacity>
           </>
         ) : (
@@ -210,10 +190,6 @@ const App = () => {
 
 const styles = StyleSheet.create({
   container: {flex: 1},
-  fullscreenIcon: {
-    width: moderateScale(25),
-    height: moderateScale(25),
-  },
   center: {
     flex: 1,
     justifyContent: 'center',
@@ -224,7 +200,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   viewbox: {
-    backgroundColor: 'rgb(0, 0, 0)',
+    backgroundColor: 'black',
     height: verticalScale(300),
     width: '100%',
     borderRadius: moderateScale(10),
@@ -233,7 +209,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     position: 'relative',
     borderWidth: 3,
-    borderColor: 'rgba(66, 66, 66, 0.29)',
+    borderColor: 'rgba(66,66,66,0.29)',
   },
   fullscreenButton: {
     position: 'absolute',
@@ -243,12 +219,10 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(50),
     padding: moderateScale(8),
     zIndex: 10,
-    borderWidth: 0,
-    borderColor: 'transparent',
   },
   focusedButton: {
     borderWidth: 3,
-    borderColor: '#00ffff', // Cyan border when focused (TV only)
+    borderColor: '#00ffff',
   },
 });
 

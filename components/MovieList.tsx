@@ -23,7 +23,11 @@ export default function ContactList() {
     try {
       const response = await fetch(DATA_URL);
       const data = await response.json();
-      setContacts(data);
+      // Get current day in lowercase (e.g., 'sunday')
+      const today = new Date()
+        .toLocaleDateString('en-US', {weekday: 'long'})
+        .toLowerCase();
+      setContacts(data[today] || []);
     } catch (error) {
       console.error('Failed to fetch movie data:', error);
     }
