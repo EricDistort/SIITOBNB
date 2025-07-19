@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   scrollContainer: {
-    height: verticalScale(287), // Takes 80% of screen height
+    height: verticalScale(286), // Takes 80% of screen height
     borderRadius: moderateScale(10),
     backgroundColor: 'rgba(20, 20, 20, 0)',
     overflow: 'hidden',

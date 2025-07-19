@@ -208,8 +208,8 @@ const styles = StyleSheet.create({
     margin: moderateScale(20),
     overflow: 'hidden',
     position: 'relative',
-    borderWidth: 3,
-    borderColor: 'rgba(66,66,66,0.29)',
+    borderWidth: 2,
+    borderColor: 'rgba(109, 109, 109, 0.18)',
   },
   fullscreenButton: {
     position: 'absolute',
