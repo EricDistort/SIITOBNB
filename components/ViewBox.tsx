@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
   },
   viewbox: {
     backgroundColor: 'black',
-    height: verticalScale(300),
+    height: verticalScale(250),
     width: '100%',
     borderRadius: moderateScale(10),
     alignSelf: 'center',

@@ -7,7 +7,6 @@ import {
   Image,
   Platform,
   TouchableOpacity,
-  Dimensions,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
@@ -15,11 +14,10 @@ import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 const DATA_URL =
   'https://raw.githubusercontent.com/EricDistort/raw/main/schedule.json';
 
-const {height} = Dimensions.get('window');
-
 export default function ContactList() {
   const [contacts, setContacts] = useState<any[]>([]);
   const [focusedId, setFocusedId] = useState<number | null>(null);
+  const [loading, setLoading] = useState(true);
   const isTV = Platform.isTV;
 
   const fetchData = async () => {
@@ -32,6 +30,9 @@ export default function ContactList() {
       setContacts(data[today] || []);
     } catch (error) {
       console.error('Failed to fetch movie data:', error);
+      setContacts([]);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -43,7 +44,11 @@ export default function ContactList() {
 
   return (
     <SafeAreaView style={styles.main}>
-      <View style={styles.scrollContainer}>
+      {loading ? (
+        <Text style={styles.loading}>Loading...</Text>
+      ) : contacts.length === 0 ? (
+        <Text style={styles.loading}>No movies found for today.</Text>
+      ) : (
         <ScrollView
           nestedScrollEnabled
           showsVerticalScrollIndicator={false}
@@ -72,24 +77,12 @@ export default function ContactList() {
             </TouchableOpacity>
           ))}
         </ScrollView>
-      </View>
+      )}
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0)',
-    padding: moderateScale(10),
-    width: '100%',
-  },
-  scrollContainer: {
-    height: verticalScale(287), // Takes 80% of screen height
-    borderRadius: moderateScale(10),
-    backgroundColor: 'rgba(20, 20, 20, 0)',
-    overflow: 'hidden',
-  },
   contacts: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -127,6 +120,13 @@ const styles = StyleSheet.create({
     color: 'rgba(255, 255, 255, 0.51)',
     marginTop: verticalScale(1),
   },
+  main: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0)',
+    padding: moderateScale(10),
+    width: '100%',
+    overflow: 'hidden',
+  },
   time: {
     fontSize: moderateScale(14),
     color: 'rgb(250, 250, 250)',
@@ -135,5 +135,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'flex-end',
     marginLeft: moderateScale(8),
+  },
+  loading: {
+    color: '#fff',
+    textAlign: 'center',
+    marginTop: 20,
+    fontSize: moderateScale(16),
   },
 });

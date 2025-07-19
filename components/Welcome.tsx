@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     height: verticalScale(40),
-    width: scale(110),
+    width: scale(150),
     alignSelf: 'center',
     marginBottom: verticalScale(2),
   },
