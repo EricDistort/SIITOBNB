@@ -14,8 +14,8 @@ import {
   Animated,
 } from 'react-native';
 import Video from 'react-native-video';
-import LottieView from 'lottie-react-native'; // Import Lottie
-import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import LottieView from 'lottie-react-native';
+import {moderateScale, s, vs, ms} from 'react-native-size-matters';
 
 const {width, height} = Dimensions.get('window');
 const DATA_URL =
@@ -97,7 +97,6 @@ export default function App() {
     <View style={styles.container}>
       <StatusBar hidden />
 
-      {/* 1. THEATER PLAYER */}
       <TouchableWithoutFeedback onPress={startTimer}>
         <View style={styles.theaterContainer}>
           {currentMovie ? (
@@ -109,9 +108,8 @@ export default function App() {
               onLoad={() => videoRef.current?.seek(seekTo)}
             />
           ) : (
-            /* REPLACED ActivityIndicator with LottieView */
             <LottieView
-              source={require('./media/loading.json')} // Ensure your path is correct
+              source={require('./media/loading.json')}
               autoPlay
               loop
               style={styles.lottieStyle}
@@ -140,7 +138,6 @@ export default function App() {
         </View>
       </TouchableWithoutFeedback>
 
-      {/* 2. CHANNELS GRID */}
       <SafeAreaView style={styles.gridSection}>
         <Text style={styles.gridHeading}>UPCOMING SHOWS</Text>
 
@@ -187,18 +184,17 @@ const styles = StyleSheet.create({
   },
   theaterContainer: {
     width: '100%',
-    height: height * 0.45,
+    height: vs(320),
     backgroundColor: '#000',
     justifyContent: 'center',
-    alignItems: 'center', // Added to center Lottie
+    alignItems: 'center',
   },
   videoStyle: {
     ...StyleSheet.absoluteFillObject,
   },
-  /* Added style for Lottie */
   lottieStyle: {
-    width: width * 0.8,
-    height: width * 0.8,
+    width: s(250),
+    height: s(250),
   },
   glowOverlay: {
     ...StyleSheet.absoluteFillObject,
@@ -206,73 +202,73 @@ const styles = StyleSheet.create({
   },
   infoFloating: {
     position: 'absolute',
-    bottom: 30,
-    left: 20,
-    right: 20,
+    bottom: vs(25),
+    left: s(20),
+    right: s(20),
   },
   liveIndicator: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'rgba(255,215,0,0.15)',
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: 20,
+    paddingHorizontal: s(10),
+    paddingVertical: vs(4),
+    borderRadius: ms(20),
     alignSelf: 'flex-start',
-    marginBottom: 10,
-    borderWidth: 1,
+    marginBottom: vs(10),
+    borderWidth: ms(1),
     borderColor: '#FFD700',
   },
   redDot: {
-    width: 6,
-    height: 6,
-    borderRadius: 3,
+    width: ms(6),
+    height: ms(6),
+    borderRadius: ms(3),
     backgroundColor: '#FFD700',
-    marginRight: 8,
+    marginRight: s(8),
   },
   liveText: {
     color: '#FFD700',
-    fontSize: moderateScale(9),
+    fontSize: ms(9),
     fontWeight: '900',
-    letterSpacing: 1,
+    letterSpacing: ms(1),
   },
   mainTitle: {
     color: '#FFF',
-    fontSize: moderateScale(26),
+    fontSize: ms(24),
     fontWeight: 'bold',
   },
   castSmall: {
     color: '#AAA',
-    fontSize: moderateScale(13),
-    marginTop: 4,
+    fontSize: ms(13),
+    marginTop: vs(4),
   },
   gridSection: {
     flex: 1,
-    paddingTop: 20,
+    paddingTop: vs(20),
   },
   gridHeading: {
     color: '#444',
-    fontSize: moderateScale(11),
+    fontSize: ms(11),
     fontWeight: '900',
-    marginLeft: 20,
-    marginBottom: 15,
-    letterSpacing: 3,
+    marginLeft: s(20),
+    marginBottom: vs(15),
+    letterSpacing: ms(3),
   },
   gridContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    paddingHorizontal: 10,
+    paddingHorizontal: s(10),
     justifyContent: 'space-between',
-    paddingBottom: 40,
+    paddingBottom: vs(40),
   },
   tile: {
-    width: width / 2 - 18,
-    height: verticalScale(120),
+    width: s(160),
+    height: vs(120),
     backgroundColor: '#111',
-    borderRadius: 15,
-    marginBottom: 15,
+    borderRadius: ms(15),
+    marginBottom: vs(10),
     overflow: 'hidden',
-    borderWidth: 1.5,
-    borderColor: '#1A1A1A',
+    borderWidth: ms(1.5),
+    borderColor: '#111',
   },
   tileFocused: {
     borderColor: '#FFD700',
@@ -285,20 +281,20 @@ const styles = StyleSheet.create({
   tilePoster: {
     width: '100%',
     height: '60%',
-    opacity: 0.6,
+    opacity: 1,
   },
   tileContent: {
-    padding: 10,
+    padding: ms(10),
   },
   tileTime: {
     color: '#FFD700',
-    fontSize: moderateScale(10),
+    fontSize: ms(10),
     fontWeight: '800',
   },
   tileName: {
     color: '#FFF',
-    fontSize: moderateScale(12),
-    marginTop: 2,
+    fontSize: ms(12),
+    marginTop: vs(2),
     fontWeight: '500',
   },
   playingBar: {
@@ -306,7 +302,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    height: 3,
+    height: vs(3),
     backgroundColor: '#FFD700',
   },
 });
