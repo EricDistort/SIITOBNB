@@ -31,8 +31,8 @@ android {
         applicationId "com.distort"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 2
-        versionName "2.0"
+        versionCode 7
+        versionName "1.0.7"
     }
     
     signingConfigs {
